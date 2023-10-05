@@ -40,6 +40,9 @@ void Deck::shuffle() {
 }
 
 Card Deck::popCard() {
+    if (this->cards.empty()) {
+        return Card(Value::NO, Suit::NO);
+    }
     Card lastCard = this->cards.back();
     this->cards.pop_back();
     return lastCard;
