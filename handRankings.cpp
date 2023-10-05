@@ -1,6 +1,9 @@
 #include "handRankings.h"
 #include <map>
 
+typedef BestHand (*rankingFunction) (Cards hand);
+
+
 BestHand::BestHand(HandRanking handRanking, std::vector<Card> hand)
 : handRanking(handRanking)
 , hand(hand) {};
@@ -12,11 +15,33 @@ void HandRankings::sort(Cards& hand) {
     });
 }
 
+BestHand HandRankings::getBestHand(Cards hand) {
+    std::vector<rankingFunction> rankingFunctions = {
+        HandRankings::isStraightFlush,
+        HandRankings::isFourOfAKind,
+        HandRankings::isFullHouse,
+        HandRankings::isFlush,
+        HandRankings::isStraight,
+        HandRankings::isSet,
+        HandRankings::isTwoPair,
+        HandRankings::isOnePair,
+        HandRankings::isHighCard
+    };
+    
+    for (auto rf : rankingFunctions) {
+        BestHand bh = rf(hand);
+        if (bh.handRanking != HandRanking::NO) {
+            return bh;
+        }
+    }
+    return BestHand(HandRanking::NO, {});
+}
+
 BestHand HandRankings::isHighCard(Cards hand) {
     return BestHand(HandRanking::HighCard, {hand.begin(), hand.begin() + 5});
 }
 
-BestHand HandRankings::isPair(Cards hand) {
+BestHand HandRankings::isOnePair(Cards hand) {
     auto [res, left] = HandRankings::getXHighCardsWithSameValue(2, hand);
     if (res.empty()) {
         return BestHand(HandRanking::NO, {});
