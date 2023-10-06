@@ -1,6 +1,6 @@
 #define BOOST_TEST_MODULE boost_test_card
 #include <boost/test/included/unit_test.hpp>
-#include "../../card.cpp"
+#include "../../src/card/card.cpp"
 
 BOOST_AUTO_TEST_CASE(test_card) {
     Card card = Card(Value::Ace, Suit::Clubs);

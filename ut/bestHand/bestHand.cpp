@@ -1,7 +1,8 @@
 #define BOOST_TEST_MODULE boost_test_best_hand
 #include <boost/test/included/unit_test.hpp>
-#include "../../handRankings.cpp"
-#include "../../card.cpp"
+#include "../../src/handRanking/handRankingQualifier.cpp"
+#include "../../src/bestHand/bestHand.cpp"
+#include "../../src/card/card.cpp"
 
 BOOST_AUTO_TEST_CASE(test_higher_pair) {
     std::vector<Card> table = {
@@ -25,8 +26,8 @@ BOOST_AUTO_TEST_CASE(test_higher_pair) {
     hand1.insert(hand1.end(), table.begin(), table.end());
     hand2.insert(hand2.end(), table.begin(), table.end());
 
-    BestHand bh1 = HandRankings::getBestHand(hand1);
-    BestHand bh2 = HandRankings::getBestHand(hand2);
+    BestHand bh1 = HandRankingQualifier::getBestHand(hand1);
+    BestHand bh2 = HandRankingQualifier::getBestHand(hand2);
 
     BOOST_TEST(bh1 < bh2);
 }
@@ -53,8 +54,8 @@ BOOST_AUTO_TEST_CASE(test_one_pair_with_kicker) {
     hand1.insert(hand1.end(), table.begin(), table.end());
     hand2.insert(hand2.end(), table.begin(), table.end());
 
-    BestHand bh1 = HandRankings::getBestHand(hand1);
-    BestHand bh2 = HandRankings::getBestHand(hand2);
+    BestHand bh1 = HandRankingQualifier::getBestHand(hand1);
+    BestHand bh2 = HandRankingQualifier::getBestHand(hand2);
 
     BOOST_TEST(bh1 < bh2);
 }
@@ -81,8 +82,8 @@ BOOST_AUTO_TEST_CASE(test_one_pair_chop_chop) {
     hand1.insert(hand1.end(), table.begin(), table.end());
     hand2.insert(hand2.end(), table.begin(), table.end());
 
-    BestHand bh1 = HandRankings::getBestHand(hand1);
-    BestHand bh2 = HandRankings::getBestHand(hand2);
+    BestHand bh1 = HandRankingQualifier::getBestHand(hand1);
+    BestHand bh2 = HandRankingQualifier::getBestHand(hand2);
 
     BOOST_TEST(bh1 == bh2);
 }
@@ -109,8 +110,8 @@ BOOST_AUTO_TEST_CASE(test_two_pair_over_one_pair) {
     hand1.insert(hand1.end(), table.begin(), table.end());
     hand2.insert(hand2.end(), table.begin(), table.end());
 
-    BestHand bh1 = HandRankings::getBestHand(hand1);
-    BestHand bh2 = HandRankings::getBestHand(hand2);
+    BestHand bh1 = HandRankingQualifier::getBestHand(hand1);
+    BestHand bh2 = HandRankingQualifier::getBestHand(hand2);
 
     BOOST_TEST(bh1 < bh2);
 }

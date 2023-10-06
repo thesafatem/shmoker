@@ -1,7 +1,8 @@
 #define BOOST_TEST_MODULE boost_test_hand_rankings
 #include <boost/test/included/unit_test.hpp>
-#include "../../card.cpp"
-#include "../../handRankings.cpp"
+#include "../../src/card/card.cpp"
+#include "../../src/bestHand/bestHand.cpp"
+#include "../../src/handRanking/handRankingQualifier.cpp"
 
 namespace tt = boost::test_tools;
 
@@ -16,7 +17,7 @@ BOOST_AUTO_TEST_CASE(test_hand_rankings_high_card) {
         Card(Value::Ten, Suit::Diamonds),
     };
     
-    BestHand bh = HandRankings::getBestHand(hand);
+    BestHand bh = HandRankingQualifier::getBestHand(hand);
 
     std::vector<Card> realBestHand = {
         Card(Value::Jack, Suit::Clubs),
@@ -48,7 +49,7 @@ BOOST_AUTO_TEST_CASE(test_hand_rankings_one_pair) {
         Card(Value::Ten, Suit::Diamonds),
     };
     
-    BestHand bh = HandRankings::getBestHand(hand);
+    BestHand bh = HandRankingQualifier::getBestHand(hand);
 
     std::vector<Card> realBestHand = {
         Card(Value::Ten, Suit::Hearts),
@@ -79,7 +80,7 @@ BOOST_AUTO_TEST_CASE(test_hand_rankings_two_pair) {
         Card(Value::Ten, Suit::Diamonds),
     };
     
-    BestHand bh = HandRankings::getBestHand(hand);
+    BestHand bh = HandRankingQualifier::getBestHand(hand);
 
     std::vector<Card> realBestHand = {
         Card(Value::Eight, Suit::Clubs),
@@ -110,7 +111,7 @@ BOOST_AUTO_TEST_CASE(test_hand_rankings_set) {
         Card(Value::Ten, Suit::Diamonds),
     };
     
-    BestHand bh = HandRankings::getBestHand(hand);
+    BestHand bh = HandRankingQualifier::getBestHand(hand);
 
     std::vector<Card> realBestHand = {
         Card(Value::Eight, Suit::Clubs),
@@ -141,7 +142,7 @@ BOOST_AUTO_TEST_CASE(test_hand_rankings_straight) {
         Card(Value::Ten, Suit::Diamonds),
     };
     
-    BestHand bh = HandRankings::getBestHand(hand);
+    BestHand bh = HandRankingQualifier::getBestHand(hand);
 
     std::vector<Card> realBestHand = {
         Card(Value::Queen, Suit::Diamonds),
@@ -172,7 +173,7 @@ BOOST_AUTO_TEST_CASE(test_hand_rankings_flush) {
         Card(Value::Ten, Suit::Diamonds),
     };
     
-    BestHand bh = HandRankings::getBestHand(hand);
+    BestHand bh = HandRankingQualifier::getBestHand(hand);
 
     std::vector<Card> realBestHand = {
         Card(Value::Ace, Suit::Diamonds),
@@ -203,7 +204,7 @@ BOOST_AUTO_TEST_CASE(test_hand_rankings_full_house) {
         Card(Value::Ten, Suit::Diamonds),
     };
     
-    BestHand bh = HandRankings::getBestHand(hand);
+    BestHand bh = HandRankingQualifier::getBestHand(hand);
 
     std::vector<Card> realBestHand = {
         Card(Value::Eight, Suit::Clubs),
@@ -234,7 +235,7 @@ BOOST_AUTO_TEST_CASE(test_hand_rankings_four_of_a_kind) {
         Card(Value::Two, Suit::Diamonds),
     };
     
-    BestHand bh = HandRankings::getBestHand(hand);
+    BestHand bh = HandRankingQualifier::getBestHand(hand);
 
     std::vector<Card> realBestHand = {
         Card(Value::Eight, Suit::Clubs),
@@ -265,7 +266,7 @@ BOOST_AUTO_TEST_CASE(test_hand_rankings_straight_flush) {
         Card(Value::Five, Suit::Diamonds),
     };
     
-    BestHand bh = HandRankings::getBestHand(hand);
+    BestHand bh = HandRankingQualifier::getBestHand(hand);
 
     std::vector<Card> realBestHand = {
         Card(Value::Five, Suit::Diamonds),
@@ -296,7 +297,7 @@ BOOST_AUTO_TEST_CASE(test_hand_rankings_royal_flush) {
         Card(Value::King, Suit::Hearts),
     };
     
-    BestHand bh = HandRankings::getBestHand(hand);
+    BestHand bh = HandRankingQualifier::getBestHand(hand);
 
     std::vector<Card> realBestHand = {
         Card(Value::Ace, Suit::Hearts),

@@ -1,7 +1,7 @@
 #define BOOST_TEST_MODULE boost_test_deck
 #include <boost/test/included/unit_test.hpp>
-#include "../../deck.cpp"
-#include "../../card.cpp"
+#include "../../src/deck/deck.cpp"
+#include "../../src/card/card.cpp"
 
 BOOST_AUTO_TEST_CASE(test_deck) {
     Deck deck = Deck();

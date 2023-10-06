@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "card.h"
+#include "../card/card.h"
 
 class Deck {
 public:
