@@ -4,6 +4,8 @@
 
 BOOST_AUTO_TEST_CASE(test_card) {
     Card card = Card(Value::Ace, Suit::Clubs);
-    BOOST_TEST(static_cast<int>(card.value) == static_cast<int>(Value::Ace));
-    BOOST_TEST(static_cast<int>(card.suit) == static_cast<int>(Suit::Clubs));
+    BOOST_TEST(
+        static_cast<int>(card.value) == static_cast<int>(Value::Ace), 
+        "Initialized " << toString(Value::Ace) << toString(Suit::Clubs) << ". " << card << " created."
+    );
 }

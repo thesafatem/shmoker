@@ -18,7 +18,7 @@ BOOST_AUTO_TEST_CASE(test_deck) {
     int collisions = 0;
     for (int i = 0; i < cards.size(); i++) {
         for (int j = i + 1; j < cards.size(); j++) {
-            if (cards[i] == cards[j] && cards[i].suit == cards[j].suit) {
+            if (cards[i] == cards[j]) {
                 collisions++;
             }
         }
