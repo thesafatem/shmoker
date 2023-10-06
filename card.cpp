@@ -4,31 +4,31 @@ Card::Card(Value value, Suit suit)
 : value(value)
 , suit(suit) { };
 
-bool Card::equals(Card const& rhs) {
+bool Card::equals(Card const& rhs) const {
     return this->value == rhs.value;
 }
 
-bool Card::operator>(Card const& rhs) {
+bool Card::operator>(Card const& rhs) const {
     return this->value > rhs.value;
 }
 
-bool Card::operator>=(Card const& rhs) {
+bool Card::operator>=(Card const& rhs) const {
     return this->value >= rhs.value;
 }
 
-bool Card::operator<(Card const& rhs) {
+bool Card::operator<(Card const& rhs) const {
     return this->value < rhs.value;
 }
 
-bool Card::operator<=(Card const& rhs) {
+bool Card::operator<=(Card const& rhs) const {
     return this->value <= rhs.value;
 }
 
-bool Card::operator==(Card const& rhs) {
+bool Card::operator==(Card const& rhs) const {
     return this->value == rhs.value && this->suit == rhs.suit;
 }
 
-bool Card::operator!=(Card const& rhs) {
+bool Card::operator!=(Card const& rhs) const {
     return this->value != rhs.value || this->suit != rhs.suit;
 }
 

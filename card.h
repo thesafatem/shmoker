@@ -8,14 +8,14 @@ public:
     Suit suit;
 
     Card(Value value, Suit suit);
-    bool equals(Card const& rhs);
+    bool equals(Card const& rhs) const;
 
-    bool operator>(Card const& rhs);
-    bool operator>=(Card const& rhs);
-    bool operator<(Card const& rhs);
-    bool operator<=(Card const& rhs);
-    bool operator==(Card const& rhs);
-    bool operator!=(Card const& rhs);
+    bool operator>(Card const& rhs) const;
+    bool operator>=(Card const& rhs) const;
+    bool operator<(Card const& rhs) const;
+    bool operator<=(Card const& rhs) const;
+    bool operator==(Card const& rhs) const;
+    bool operator!=(Card const& rhs) const;
     operator std::string() const;
 
     friend std::ostream & operator <<(std::ostream &out, const Card &card);
