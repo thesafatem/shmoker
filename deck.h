@@ -4,8 +4,6 @@
 
 class Deck {
 public:
-    // std::vector<Card> cards;
-
     Deck();
     Card popCard();
 
