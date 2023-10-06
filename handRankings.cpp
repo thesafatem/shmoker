@@ -8,6 +8,20 @@ BestHand::BestHand(HandRanking handRanking, std::vector<Card> hand)
 : handRanking(handRanking)
 , hand(hand) {};
 
+BestHand::operator std::string() const {
+    std::ostringstream out;
+    out << *this;
+    return out.str();
+}
+
+std::ostream & operator <<(std::ostream &out, const BestHand &bh) {
+    out << toString(bh.handRanking) << "\n";
+    for (auto card : bh.hand) {
+        out << card << " ";
+    }
+    return out;
+}
+
 
 void HandRankings::sort(Cards& hand) {
     std::sort(hand.begin(), hand.end(), [&](Card left, Card right) {
@@ -83,13 +97,20 @@ BestHand HandRankings::isStraight(Cards hand) {
         if (static_cast<int>(hand[i].value) == static_cast<int>(bestHand.back().value) - 1) {
             bestHand.push_back(hand[i]);
         } else if (static_cast<int>(hand[i].value) < static_cast<int>(bestHand.back().value) - 1) {
-            bestHand = {hand[i]};
+            // replace current straight only if there are 3 or less cards
+            // 4 is good for A-?-?-5-4-3-2 situation
+            if (bestHand.size() < 4) {
+                bestHand = {hand[i]};
+            }
         }
     }
     if (bestHand.size() < 4) {
         return BestHand(HandRanking::NO, {});
     }
-    if (bestHand.size() == 4 && bestHand[0].value == Value::Five && hand[0].value == Value::Ace) {
+    if (bestHand.size() == 4 && !(bestHand[0].value == Value::Five && hand[0].value == Value::Ace)) {
+        return BestHand(HandRanking::NO, {});
+    }
+    if (bestHand.size() == 4) {
         bestHand.push_back(hand[0]);
     }
     return BestHand(HandRanking::Straight, Cards(bestHand.begin(), bestHand.begin() + 5)); 
@@ -148,7 +169,7 @@ BestHand HandRankings::isStraightFlush(Cards hand) {
 std::pair<Cards, Cards> HandRankings::getXHighCardsWithSameValue(int X, Cards hand) {
     for (int i = 0; i < hand.size(); i++) {
         if (i + X - 1 < hand.size()) {
-            if (hand[i] == hand[i + X - 1]) {
+            if (hand[i].equals(hand[i + X - 1])) {
                 Cards take = Cards(hand.begin() + i, hand.begin() + i + X);
                 hand.erase(hand.begin() + i, hand.begin() + i + X);
                 return std::make_pair(take, hand);
@@ -164,12 +185,18 @@ Cards HandRankings::getAllFlushCards(Cards hand) {
     for (auto card : hand) {
         suitCount[card.suit] += 1;
     }
-    auto largestSuit = suitCount.begin();
-    if (largestSuit->second < 5) {
+    Suit largestSuit = Suit::NO;
+    for (auto [suit, count] : suitCount) {
+        if (count >= 5) {
+            largestSuit = suit;
+            break;
+        }
+    }
+    if (largestSuit == Suit::NO) {
         return {};
     }
     for (auto card : hand) {
-        if (card.suit == largestSuit->first) {
+        if (card.suit == largestSuit) {
             flushHand.push_back(card);
         }
     }
